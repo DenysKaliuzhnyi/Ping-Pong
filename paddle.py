@@ -11,7 +11,6 @@ class Paddle(GameObject):
         self.offset = offset
         self.moving_up = False
         self.moving_down = False
-        self.ignore = None
 
     def draw(self, surface):
         pygame.draw.rect(surface, self.color, self.bounds)
@@ -23,13 +22,11 @@ class Paddle(GameObject):
             self.moving_down = not self.moving_down
 
     def update(self):
-        if not self.ignore:
-            if self.moving_up and self.ignore != "up":
-                dy = -(min(self.offset, self.top))
-            elif self.moving_down and self.ignore != "down":
-                dy = min(self.offset, c.screen_height - self.bottom)
-            else:
-                return
-            self.speed = [0, dy]
-            super().update()
-        self.ignore = False
+        if self.moving_up:
+            dy = -(min(self.offset, self.top))
+        elif self.moving_down:
+            dy = min(self.offset, c.screen_height - self.bottom)
+        else:
+            return
+        self.speed = [0, dy]
+        super().update()

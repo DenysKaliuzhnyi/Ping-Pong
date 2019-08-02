@@ -2,7 +2,7 @@ from pygame.rect import Rect
 
 
 class GameObject:
-    def __init__(self, x, y, w, h, speed=(0,0)):
+    def __init__(self, x, y, w, h, speed=(0, 0)):
         self.bounds = Rect(x, y, w, h)
         self.speed = speed
 
